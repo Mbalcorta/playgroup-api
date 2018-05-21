@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
 import urllib2
 from bs4 import BeautifulSoup
-import csv
-from datetime import datetime
-import xml.etree.cElementTree as ET
 
 def getEventHtml(library):   
     page = urllib2.urlopen(library)
@@ -61,7 +58,6 @@ def libraryObject():
             eachLibrary: getEventHtml(allLibraries[eachLibrary])
         })
 
-    print('Done loading all libraries events')
-    return libraryObject
+    print(libraryObject)
 
 libraryObject()
