@@ -11,6 +11,10 @@ def getEventHtml(library):
 
     allEventTables = content.find_all("table", class_="views-table cols-3")
 
+    if len(allEventTables) == 0: 
+        content = soup.find_all('div', attrs={'class': 'view-content'})[1]
+        allEventTables = content.find_all("table", class_="views-table cols-3")
+
     for eachEvent in allEventTables:
         eventObject.append( { 
             'date': eachEvent.find_all('span')[0],
@@ -57,7 +61,7 @@ def libraryObject():
         libraryObject.append({
             eachLibrary: getEventHtml(allLibraries[eachLibrary])
         })
-
+    
     print(libraryObject)
 
 libraryObject()
