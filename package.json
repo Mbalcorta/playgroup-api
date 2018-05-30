@@ -12,10 +12,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3",
     "python-shell": "^0.5.0"
   },
   "devDependencies": {
+    "firebase-admin": "^5.12.1",
     "nodemon": "^1.17.4"
   }
 }
