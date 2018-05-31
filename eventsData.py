@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import urllib2
 from bs4 import BeautifulSoup
+import json
 
 def getEventHtml(library):   
     page = urllib2.urlopen(library)
@@ -55,13 +56,21 @@ def libraryObject():
         "melrose_library": melrose_url,
     }   
 
-    libraryObject = []
+    libraryObject= {}
 
     for eachLibrary in allLibraries.keys():
-        libraryObject.append({
-            eachLibrary: getEventHtml(allLibraries[eachLibrary])
-        })
-    
-    print(libraryObject)
+        libraryObject[eachLibrary] = getEventHtml(allLibraries[eachLibrary])
+
+    # must remove array of events to turn into 
+    # 'melrose_library'= {
+    #     'date': {
+    #         'eventOfTheDay':{
+    #             'info': 'play cafe',
+    #             'time': '3:00pm'
+    #         }
+    #     }
+    # }
+    jsonEvents = json.dumps(libraryObject)
+    print(jsonEvents)
 
 libraryObject()
