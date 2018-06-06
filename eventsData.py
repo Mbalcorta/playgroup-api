@@ -62,11 +62,18 @@ def libraryObject():
         "melrose_library": melrose_url,
     }   
 
+    locations = {
+        "melrose_library": {"lat": 37.772424, "lng": -122.20755}
+    }
+
     libraryObject= {}
-    # libraryObject["melrose_library"] = getEventHtml(allLibraries["melrose_library"])
+    libraryObject["melrose_library"] = {
+        'location': locations["melrose_library"],
+        'allEvents': getEventHtml(allLibraries["melrose_library"])
+    }
     
-    for eachLibrary in allLibraries.keys():
-        libraryObject[eachLibrary] = getEventHtml(allLibraries[eachLibrary])
+    # for eachLibrary in allLibraries.keys():
+    #     libraryObject[eachLibrary] = getEventHtml(allLibraries[eachLibrary])
 
     # must remove array of events to turn into 
     # 'melrose_library'= {
