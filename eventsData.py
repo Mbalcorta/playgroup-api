@@ -17,25 +17,31 @@ def getEventHtml(library):
         allEventTables = content.find_all("table", class_="views-table cols-3")
 
     for eachEvent in allEventTables:
-        eventObject.append( { 
+        eventObject.append([{ 
             'date': eachEvent.find_all('span')[0],
             'time': eachEvent.find_all('span')[1:], 
             'info': eachEvent.find_all('a')[::2]
-            })
+            }])
 
-    for eventInfo in eventObject: 
-         date = eventInfo['date'].text.strip()
-
-         for index, eachTime in enumerate(eventInfo['time']):
-            info =  eventInfo['info'][index].text.strip()
-            time =  eachTime.text.strip()
-
+    for index, eventInfo in enumerate(eventObject):
+         date = eventInfo[0]['date'].text.strip()
          eventText.append({ 
              'date': date,
-             'info': info,
-             'time': time
-         })
-
+             'eventInfo': {
+                 "info": [],
+                 "time": []
+             }
+            })
+        # need to refactor to only loop once
+         for eachTime in eventInfo[0]["info"]:
+             info =  eachTime.text.strip()
+             eventInfoArray = eventText[index]['eventInfo']['info']
+             eventInfoArray.append(info)
+         for eachTime in eventInfo[0]["time"]:
+             info =  ''
+             time =  eachTime.text.strip()
+             eventTimeArray = eventText[index]['eventInfo']['time']
+             eventTimeArray.append(time)
     return  eventText
     
 
@@ -57,7 +63,8 @@ def libraryObject():
     }   
 
     libraryObject= {}
-
+    # libraryObject["melrose_library"] = getEventHtml(allLibraries["melrose_library"])
+    
     for eachLibrary in allLibraries.keys():
         libraryObject[eachLibrary] = getEventHtml(allLibraries[eachLibrary])
 
@@ -68,7 +75,7 @@ def libraryObject():
     #             'info': 'play cafe',
     #             'time': '3:00pm'
     #         }
-    #     }
+    #     
     # }
     jsonEvents = json.dumps(libraryObject)
     print(jsonEvents)
