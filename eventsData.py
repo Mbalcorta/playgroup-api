@@ -7,7 +7,7 @@ def getEventHtml(library):
     page = urllib2.urlopen(library)
     soup = BeautifulSoup(page, 'html.parser')
     content = soup.find('div', attrs={'class': 'view-content'})
-    eventObject = []
+    eventObjectHtml = []
     eventText = []
 
     allEventTables = content.find_all("table", class_="views-table cols-3")
@@ -16,14 +16,22 @@ def getEventHtml(library):
         content = soup.find_all('div', attrs={'class': 'view-content'})[1]
         allEventTables = content.find_all("table", class_="views-table cols-3")
 
-    for eachEvent in allEventTables:
-        eventObject.append([{ 
+    for index, eachEvent in enumerate(allEventTables):
+        eventObjectHtml.append([{ 
             'date': eachEvent.find_all('span')[0],
             'time': eachEvent.find_all('span')[1:], 
-            'info': eachEvent.find_all('a')[::2]
+            'info': eachEvent.find_all('a')[::2],
+            'allHref': []
             }])
+        
+        for inner, eachEvent in enumerate(eventObjectHtml[index]):
+            eventHrefArray = eventObjectHtml[index][inner]['allHref']
+            for eachInfo in eachEvent['info']:
+                eventHrefArray.append({
+                    'href': eachInfo.attrs['href']
+                 })
 
-    for index, eventInfo in enumerate(eventObject):
+    for index, eventInfo in enumerate(eventObjectHtml):
          date = eventInfo[0]['date'].text.strip()
          eventText.append({ 
              'date': date,
