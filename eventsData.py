@@ -20,36 +20,25 @@ def getEventHtml(library):
         eventObjectHtml.append([{ 
             'date': eachEvent.find_all('span')[0],
             'time': eachEvent.find_all('span')[1:], 
-            'info': eachEvent.find_all('a')[::2],
-            'allHref': []
+            'info': eachEvent.find_all('a')[::2]
             }])
-        
-        for inner, eachEvent in enumerate(eventObjectHtml[index]):
-            eventHrefArray = eventObjectHtml[index][inner]['allHref']
-            for eachInfo in eachEvent['info']:
-                eventHrefArray.append({
-                    'href': eachInfo.attrs['href']
-                 })
 
     for index, eventInfo in enumerate(eventObjectHtml):
          date = eventInfo[0]['date'].text.strip()
          eventText.append({ 
              'date': date,
-             'eventInfo': {
-                 "info": [],
-                 "time": []
-             }
+             'eventInfo': []
             })
-        # need to refactor to only loop once
-         for eachTime in eventInfo[0]["info"]:
-             info =  eachTime.text.strip()
-             eventInfoArray = eventText[index]['eventInfo']['info']
-             eventInfoArray.append(info)
-         for eachTime in eventInfo[0]["time"]:
-             info =  ''
-             time =  eachTime.text.strip()
-             eventTimeArray = eventText[index]['eventInfo']['time']
-             eventTimeArray.append(time)
+    
+         appendToEventText = eventText[index]['eventInfo']
+         eachAnchor = eventObjectHtml[index][0]
+         for index, eachElement in enumerate(eachAnchor['info']):
+             appendToEventText.append({
+                 'eventName': eachElement.text.strip(),
+                 'time': eachAnchor['time'][index].text.strip(),
+                 'url': 'http://oaklandlibrary.org'+eachElement.attrs['href']
+             })
+
     return  eventText
     
 
@@ -83,15 +72,6 @@ def libraryObject():
     # for eachLibrary in allLibraries.keys():
     #     libraryObject[eachLibrary] = getEventHtml(allLibraries[eachLibrary])
 
-    # must remove array of events to turn into 
-    # 'melrose_library'= {
-    #     'date': {
-    #         'eventOfTheDay':{
-    #             'info': 'play cafe',
-    #             'time': '3:00pm'
-    #         }
-    #     
-    # }
     jsonEvents = json.dumps(libraryObject)
     print(jsonEvents)
 
