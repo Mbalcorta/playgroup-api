@@ -60,17 +60,25 @@ def libraryObject():
     }   
 
     locations = {
-        "melrose_library": {"lat": 37.772424, "lng": -122.20755}
+        "melrose_library": {"lat": 37.772424, "lng": -122.20755},
+        "elmhurst_library": {"lat": 37.7515679, "lng": -122.17491540000003},
+        "avenue81_library": {"lat": 37.7533954, "lng": -122.18569109999999},
+        "eastmont_library": {"lat": 37.7681292, "lng": -122.17615089999998},
+        "caesar_chavez_library": {"lat": 37.7758485, "lng": -122.22479379999999},
     }
 
     libraryObject= {}
-    libraryObject["melrose_library"] = {
-        'location': locations["melrose_library"],
-        'allEvents': getEventHtml(allLibraries["melrose_library"])
-    }
+    # libraryObject["melrose_library"] = {
+        # 'location': locations["melrose_library"],
+        # 'allEvents': getEventHtml(allLibraries["melrose_library"])
+    # }
     
-    # for eachLibrary in allLibraries.keys():
-    #     libraryObject[eachLibrary] = getEventHtml(allLibraries[eachLibrary])
+    for eachLibrary in allLibraries.keys():
+        libraryObject[eachLibrary] = {
+            'location': locations[eachLibrary],
+            'allEvents': getEventHtml(allLibraries[eachLibrary])
+        }
+        
 
     jsonEvents = json.dumps(libraryObject)
     print(jsonEvents)

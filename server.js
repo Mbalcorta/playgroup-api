@@ -12,32 +12,31 @@ var db = firebase.database();
 
 var myPythonScriptPath = 'eventsData.py';
 
-// Use python shell
-
 var pyshell = new PythonShell(myPythonScriptPath);
 const allEventsArray = []
 
+//figure out way to trigger cron job at midnight for this to pull data from sites everyday
+
 pyshell.on('message', function (message) {
-    // received a message sent from the Python script (a simple "print" statement)
     const eventsPath = db.ref('libraryEvents')
     allEvents = JSON.parse(message)
     eventsPath.set(allEvents)
   });
 
-db.ref().on("value", function(snapshot) {
-  const events = snapshot.val()
-  console.log(events['libraryEvents']['melrose_library'][1])
-}, function (error) {
-  console.log("Error: " + error.code);
-});
+// db.ref().on("value", function(snapshot) {
+//   const events = snapshot.val()
+//   console.log(events['libraryEvents']['melrose_library']['location'])
+// }, function (error) {
+//   console.log("Error: " + error.code);
+// });
 
 // end the input stream and allow the process to exit
 pyshell.end(function (err) {
     if (err){
         throw err;
     };
-
     console.log('finished');
+    process.exit()
 });
 
 // var usersRef = ref.child("users");
