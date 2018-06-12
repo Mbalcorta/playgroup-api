@@ -52,19 +52,19 @@ def libraryObject():
     melrose_url = oaklandLibrary+"254"+familyChildEvent
 
     allLibraries = {
-        "avenue81_library": avenue81_url ,
-        "elmhurst_library": elmhurst_url,
-        "eastmont_library": eastmont_url,
-        "caesar_chavez_library": caesar_chavez_url,
-        "melrose_library": melrose_url,
+        "Avenue81_Library": avenue81_url ,
+        "Elmhurst_Library": elmhurst_url,
+        "Eastmont_Library": eastmont_url,
+        "Caesar_Chavez_Library": caesar_chavez_url,
+        "Melrose_Library": melrose_url,
     }   
 
     locations = {
-        "melrose_library": {"lat": 37.772424, "lng": -122.20755},
-        "elmhurst_library": {"lat": 37.7515679, "lng": -122.17491540000003},
-        "avenue81_library": {"lat": 37.7533954, "lng": -122.18569109999999},
-        "eastmont_library": {"lat": 37.7681292, "lng": -122.17615089999998},
-        "caesar_chavez_library": {"lat": 37.7758485, "lng": -122.22479379999999},
+        "Melrose_Library": {"lat": 37.772424, "lng": -122.20755},
+        "Elmhurst_Library": {"lat": 37.7515679, "lng": -122.17491540000003},
+        "Avenue81_Library": {"lat": 37.7533954, "lng": -122.18569109999999},
+        "Eastmont_Library": {"lat": 37.7681292, "lng": -122.17615089999998},
+        "Caesar_Chavez_Library": {"lat": 37.7758485, "lng": -122.22479379999999},
     }
 
     libraryObject= {}
