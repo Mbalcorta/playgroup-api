@@ -15,7 +15,7 @@ def main(argv):
     service, flags = sample_tools.init(
         argv, 'calendar', 'v3', __doc__, __file__,
         scope='https://www.googleapis.com/auth/calendar.readonly')
-
+    allEvents = []
     try:
         page_token = None
         while True:
@@ -31,14 +31,23 @@ def main(argv):
           pageToken=page_token).execute()
           for event in events['items']:
             if event['summary'] != 'Closed':
-                print(event['summary'])
-                print(event['description'])
-                print(event['start']['dateTime'])
-                print(event['end']['dateTime'])
+                eventName = event['summary'] +', '+ event['description']
+                allEvents.append({
+                    'date': event['start']['dateTime'],
+                    'eventInfo': [{
+                        'eventName': eventName,
+                        'url': 'http://www.lotusbloomfamily.org/allendale.html',
+                        'time': event['end']['dateTime']
+                    }] 
+                })
+                print(datetime(*(time.strptime(event['start']['dateTime'], format)[0:6])))
+                # print(allEvents)
           page_token = events.get('nextPageToken')
           if not page_token:
             break
-
+    
+# need to return data as so and saved to database
+# {'Allendale_School': {'allEvents': [{'date': 'Thursday, June 21st, 2018', 'eventInfo':[{"eventName": "Oakland Symphony Instrument Petting Zoo", "url": "http://oaklandlibrary.org/events/melrose-branch/oakland-symphony-instrument-petting-zoo-0", "time":"1:00pm"}]}], "location": {"lat": 37.7515679, "lng": -122.17491540000003}}}
     except client.AccessTokenRefreshError:
         print('The credentials have been revoked or expired, please re-run'
               'the application to re-authorize.')
