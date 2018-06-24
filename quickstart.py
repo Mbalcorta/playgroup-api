@@ -32,12 +32,21 @@ def main(argv):
           pageToken=page_token).execute()
           for event in events['items']:
             if event['summary'] != 'Closed':
-                # print(event)
                 eventName = event['summary'] +', '+ event['description']
                 date = event['start']['dateTime'][0: 10]
                 time = event['start']['dateTime'][11:16]+'-'+ event['end']['dateTime'][11:16]
+                objDate = datetime.strptime(date, '%Y-%m-%d')
+
+                def suffix(d):
+                    return 'th' if 11<=d<=13 else {1:'st',2:'nd',3:'rd'}.get(d%10, 'th')
+
+                def custom_strftime(format, t):
+                    return t.strftime(format).replace('{S}', str(t.day) + suffix(t.day))
+                
+                dateFormatted = custom_strftime('%A %B {S}, %Y', objDate)
+               
                 allEvents.append({
-                    'date': date,
+                    'date': dateFormatted,
                     'eventInfo': [{
                         'eventName': eventName,
                         'url': 'http://www.lotusbloomfamily.org/allendale.html',
