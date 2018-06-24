@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-import urllib2
+import urllib.request
 from bs4 import BeautifulSoup
 import json
 
 def getEventHtml(library):   
-    page = urllib2.urlopen(library)
+    page = urllib.request.urlopen(library)
     soup = BeautifulSoup(page, 'html.parser')
     content = soup.find('div', attrs={'class': 'view-content'})
     eventObjectHtml = []
