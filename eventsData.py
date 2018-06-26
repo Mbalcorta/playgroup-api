@@ -44,7 +44,7 @@ def getEventHtml(library):
 
 def libraryObject():
     oaklandLibrary = "http://oaklandlibrary.org/events?field_eventlocation_nid%5B%5D="
-    familyChildEvent = "&tid%5B%5D=16"
+    familyChildEvent = "&tid%5B%5D=16&tid%5B%5D=19"
     avenue81_url = oaklandLibrary+"244"+familyChildEvent
     elmhurst_url = oaklandLibrary+"250"+familyChildEvent
     eastmont_url = oaklandLibrary+"249"+familyChildEvent
@@ -68,9 +68,9 @@ def libraryObject():
     }
 
     libraryObject= {}
-    # libraryObject["melrose_library"] = {
-        # 'location': locations["melrose_library"],
-        # 'allEvents': getEventHtml(allLibraries["melrose_library"])
+    # libraryObject["Elmhurst_Library"] = {
+    #     'location': locations["Elmhurst_Library"],
+    #     'allEvents': getEventHtml(allLibraries["Elmhurst_Library"])
     # }
     
     for eachLibrary in allLibraries.keys():
