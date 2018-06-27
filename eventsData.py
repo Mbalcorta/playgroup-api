@@ -50,6 +50,8 @@ def libraryObject():
     eastmont_url = oaklandLibrary+"249"+familyChildEvent
     caesar_chavez_url = oaklandLibrary+"247"+familyChildEvent
     melrose_url = oaklandLibrary+"254"+familyChildEvent
+    martin_luther_king_jr_url = oaklandLibrary+"253"+familyChildEvent
+    brookfield_url = oaklandLibrary+"246"+familyChildEvent
 
     allLibraries = {
         "Avenue81_Library": avenue81_url ,
@@ -57,6 +59,8 @@ def libraryObject():
         "Eastmont_Library": eastmont_url,
         "Caesar_Chavez_Library": caesar_chavez_url,
         "Melrose_Library": melrose_url,
+        "Martin_Luther_King_Jr_Library": martin_luther_king_jr_url,
+        "Brookfield_Library": brookfield_url
     }   
 
     locations = {
@@ -65,6 +69,8 @@ def libraryObject():
         "Avenue81_Library": {"lat": 37.7533954, "lng": -122.18569109999999},
         "Eastmont_Library": {"lat": 37.7681292, "lng": -122.17615089999998},
         "Caesar_Chavez_Library": {"lat": 37.7758485, "lng": -122.22479379999999},
+        "Martin_Luther_King_Jr_Library": {"lat": 37.7606056, "lng":-122.1907903},
+        "Brookfield_Library": {"lat": 37.7373361, "lng":-122.18857330000003}
     }
 
     libraryObject= {}
