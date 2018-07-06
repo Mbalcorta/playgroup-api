@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dateutil": "^0.1.0",
     "python-shell": "^0.5.0"
   },
   "devDependencies": {
