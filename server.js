@@ -40,5 +40,8 @@ const addFirebaseContent = (fileName, dbRef) => {
     });
 }
 
-addFirebaseContent('eventsData.py', 'libraryEvents')
-addFirebaseContent('quickstart.py', 'allendaleEvents')
+//need to figure out how to make one call after another
+//can't do both calls at the same time
+// addFirebaseContent('lotusBloomEvents.py', 'allendaleEvents')
+addFirebaseContent('libraryEvents.py', 'libraryEvents')
+
