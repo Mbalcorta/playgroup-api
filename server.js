@@ -12,7 +12,7 @@ firebase.initializeApp({
 var db = firebase.database();
 
 const addFirebaseContent = (fileName, dbRef) => {
-
+    return new Promise(function(resolve, reject) {
     var options = {
         pythonPath: "/Library/Frameworks/Python.framework/Versions/3.6/bin/python3"
       };
@@ -31,12 +31,13 @@ const addFirebaseContent = (fileName, dbRef) => {
         eventsPath.set(allEvents)
       });
     
-    pyshell.end(function (err) {
-        if (err){
-            throw err;
-        };
-        console.log('finished');
-        process.exit()
+    return pyshell.end(function (err) {
+            if (err){
+              return reject(err);
+            };
+            return resolve('finished');
+            process.exit()
+        })  
     });
 }
 
@@ -44,4 +45,7 @@ const addFirebaseContent = (fileName, dbRef) => {
 //can't do both calls at the same time
 // addFirebaseContent('lotusBloomEvents.py', 'allendaleEvents')
 addFirebaseContent('libraryEvents.py', 'libraryEvents')
+.then(response => console.log(response))
+.then(addFirebaseContent('lotusBloomEvents.py', 'allendaleEvents'))
+.catch(error => console.log(error))
 
