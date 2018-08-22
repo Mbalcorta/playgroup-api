@@ -41,9 +41,6 @@ const addFirebaseContent = (fileName, dbRef) => {
     });
 }
 
-//need to figure out how to make one call after another
-//can't do both calls at the same time
-// addFirebaseContent('lotusBloomEvents.py', 'allendaleEvents')
 addFirebaseContent('libraryEvents.py', 'libraryEvents')
 .then(response => console.log(response))
 .then(addFirebaseContent('lotusBloomEvents.py', 'allendaleEvents'))
