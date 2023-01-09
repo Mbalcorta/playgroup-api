@@ -16,7 +16,7 @@
     "python-shell": "^0.5.0"
   },
   "devDependencies": {
-    "firebase-admin": "^5.12.1",
+    "firebase-admin": "^11.4.1",
     "nodemon": "^1.17.4"
   }
 }
